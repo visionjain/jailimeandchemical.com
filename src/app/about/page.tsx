@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 const AboutPage = () => {
   return (
@@ -69,7 +68,7 @@ const AboutPage = () => {
             A Perfect Finish Every Time
           </h2>
           <p className="text-base text-white/95 leading-relaxed">
-            Call us and let's talk about your project. We love what we do and take pride in doing it the right way. 
+            Call us and let&apos;s talk about your project. We love what we do and take pride in doing it the right way. 
             We know it can be difficult getting reliable information and that talking to a professional is the best way to get answers fast.
           </p>
         </div>

@@ -45,8 +45,8 @@ const ProductsPage = () => {
     },
     {
       id: 4,
-      name: "Specialized Plaster Finishes",
-      description: "Our specialized plaster finishes offer unique aesthetic options for those seeking distinctive wall treatments with premium quality.",
+      name: "Heritage/Aarish Plaster Finishes",
+      description: "Our heritage and Aarish plaster finishes offer unique aesthetic options that draw from traditional techniques, creating distinctive wall treatments with premium quality.",
       features: [
         "Unique decorative finishes",
         "Premium quality materials",
@@ -54,7 +54,7 @@ const ProductsPage = () => {
         "Suitable for feature walls",
         "Professional application available"
       ],
-      image: "/lime.jpg"
+      image: "/aarish.png" // Updated to use the new aarish.png image
     }
   ];
 

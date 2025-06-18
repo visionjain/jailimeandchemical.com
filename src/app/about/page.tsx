@@ -8,7 +8,7 @@ const AboutPage = () => {
       <div className="relative h-[350px] md:h-[450px]">
         <Image 
           src="/image.jpg" 
-          alt="About Jai Lime & Chemical" 
+          alt="About Manisha Lime Finish" 
           fill
           className="object-cover"
         />
@@ -24,7 +24,7 @@ const AboutPage = () => {
             <div>
               <h2 className="text-3xl font-bold text-orange-800 mb-6">Our Story</h2>
               <p className="text-gray-700 mb-6 leading-relaxed">
-                Jai Lime & Chemical is a reputable firm in Udaipur, India, specializing in lime-based finishing plaster solutions. 
+                Manisha Lime Finish is a reputable firm in Udaipur, India, specializing in lime-based finishing plaster solutions. 
                 Established in 2007, we have over 17 years of experience in the industry, making us a trusted name in the market.
               </p>
               <p className="text-gray-700 mb-6 leading-relaxed">

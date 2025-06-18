@@ -6,7 +6,7 @@ import Footer from '../components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Jai Lime & Chemical',
+  title: 'Manisha Lime Finish',
   description: 'Premium lime plaster solutions in Udaipur, India',
 }
 

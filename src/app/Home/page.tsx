@@ -8,16 +8,17 @@ import ProcessSection from '../../components/ProcessSection';
 import ContactSection from '../../components/ContactSection';
 
 const HomePage = () => {
-  // Make sure these image paths are correct
+  // Updated slider images array with all 5 images
   const sliderImages = [
-    '/image.jpg', // This should exist in public/image.jpg
-    '/image.jpg',
-    '/image.jpg',
-    '/image.jpg',
+    '/image.jpg',    // Original image
+    '/slider1.png',  // New slider image 1
+    '/slider2.png',  // New slider image 2
+    '/slider3.png',  // New slider image 3
+    '/slider4.png',  // New slider image 4
   ];
 
   return (
-    <div className="pt-0"> {/* Removed top padding */}
+    <div className="pt-0">
       <ImageSlider images={sliderImages} />
       <AboutSection />
       <FeaturesSection />

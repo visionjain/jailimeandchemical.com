@@ -10,6 +10,7 @@ interface ImageSliderProps {
 const ImageSlider = ({ images }: ImageSliderProps) => {
   const [currentImage, setCurrentImage] = useState(0);
 
+  // Auto-rotate slider
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
@@ -17,6 +18,30 @@ const ImageSlider = ({ images }: ImageSliderProps) => {
 
     return () => clearInterval(interval);
   }, [images.length]);
+
+  // Slide captions for each image
+  const slideContent = [
+    {
+      title: "Premium Lime Plaster Solutions",
+      description: "Transforming spaces with natural, sustainable lime-based solutions since 2007"
+    },
+    {
+      title: "Eco-Friendly Building Materials",
+      description: "Natural, breathable finishes that improve with age"
+    },
+    {
+      title: "Heritage & Traditional Techniques",
+      description: "Reviving historic craftsmanship with modern applications"
+    },
+    {
+      title: "Professional Plastering Services",
+      description: "Expert application by skilled craftsmen for perfect results"
+    },
+    {
+      title: "Create Timeless Beauty",
+      description: "Transform your walls with textures that tell a story"
+    }
+  ];
 
   return (
     <div className="relative w-full h-[550px] md:h-[650px] overflow-hidden">
@@ -35,15 +60,12 @@ const ImageSlider = ({ images }: ImageSliderProps) => {
             priority={index === 0}
           />
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <div className="text-center text-white px-4 mt-16"> {/* Added margin-top to push content down */}
+            <div className="text-center text-white px-4 mt-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                {index === 0 && "Premium Lime Plaster Solutions"}
-                {index === 1 && "Eco-Friendly Building Materials"}
-                {index === 2 && "Professional Plastering Services"}
-                {index === 3 && "17+ Years of Excellence"}
+                {slideContent[index].title}
               </h2>
               <p className="text-xl md:text-2xl max-w-3xl mx-auto">
-                Transforming spaces with natural, sustainable lime-based solutions since 2007
+                {slideContent[index].description}
               </p>
             </div>
           </div>

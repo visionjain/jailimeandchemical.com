@@ -66,10 +66,10 @@ const Navbar = () => {
         } max-w-7xl mx-auto w-full`}
       >
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo - Updated company name */}
           <div className="flex-shrink-0">
             <Link href="/" className={`text-xl font-bold ${scrolled ? 'text-orange-700' : 'text-white'}`}>
-              <span className="font-serif">Jai Lime</span>
+              <span className="font-serif">Manisha Lime Finish</span>
             </Link>
           </div>
 

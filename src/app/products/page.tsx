@@ -1,13 +1,23 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import ProductDetail from '../../components/ProductDetail';
+import { Product } from '../../types';
 
 const ProductsPage = () => {
-  const products = [
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [showDetail, setShowDetail] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  
+  // Product data with additional photos for gallery
+  const products: Product[] = [
     {
       id: 1,
       name: "Lime Plaster",
       description: "Our premium lime plaster provides a natural, breathable finish that improves with age. It's perfect for both interior and exterior walls, offering excellent mold resistance and thermal regulation properties.",
+      longDescription: "Lime plaster has been used for centuries and is known for its durability and natural beauty. Our lime plaster is carefully formulated using high-quality materials and traditional techniques to ensure exceptional results. It's not just a wall covering – it's a living, breathing surface that enhances the comfort and health of your living spaces.",
       features: [
         "Natural and breathable",
         "Mold and mildew resistant",
@@ -15,12 +25,21 @@ const ProductsPage = () => {
         "Environmentally friendly",
         "Long-lasting durability"
       ],
-      image: "/lime.jpg"
+      image: "/lime.jpg",
+      gallery: [
+        "/lime.jpg",
+        "/image.jpg",
+        "/aboutback.jpg",
+        "/lime.jpg",
+        "/image.jpg",
+        "/lime.jpg",
+      ]
     },
     {
       id: 2,
       name: "Wall Texture/Rustic",
       description: "Create unique wall finishes with our textured wall solutions that add character to any space. Our rustic textures provide depth and personality to your walls with various finish options.",
+      longDescription: "Our textured wall finishes bring depth and character to any space. Each application is unique, creating a personalized look that can't be replicated by mass-produced wall coverings. These finishes are perfect for creating statement walls or bringing a touch of rustic elegance to your entire home.",
       features: [
         "Multiple texture options",
         "Customizable finishes",
@@ -28,12 +47,21 @@ const ProductsPage = () => {
         "Hides wall imperfections",
         "Easy to maintain"
       ],
-      image: "/lime.jpg"
+      image: "/lime.jpg",
+      gallery: [
+        "/lime.jpg",
+        "/image.jpg",
+        "/aboutback.jpg",
+        "/lime.jpg",
+        "/image.jpg",
+        "/lime.jpg",
+      ]
     },
     {
       id: 3,
       name: "Water Proofing Solution",
       description: "Our waterproofing solutions provide excellent protection against moisture and water damage, ensuring the longevity of your building structures.",
+      longDescription: "Water damage is one of the most destructive forces affecting buildings today. Our specialized waterproofing solutions create an impermeable barrier that protects walls, foundations, and other surfaces from moisture infiltration. Unlike conventional waterproofing products, our solutions are designed to integrate seamlessly with our lime-based products for complete protection.",
       features: [
         "Superior water resistance",
         "Prevents seepage and leakage",
@@ -41,12 +69,21 @@ const ProductsPage = () => {
         "Can be applied to various surfaces",
         "Environmentally safe formula"
       ],
-      image: "/lime.jpg"
+      image: "/lime.jpg",
+      gallery: [
+        "/lime.jpg",
+        "/image.jpg",
+        "/aboutback.jpg",
+        "/lime.jpg",
+        "/image.jpg",
+        "/lime.jpg",
+      ]
     },
     {
       id: 4,
       name: "Heritage/Aarish Plaster Finishes",
       description: "Our heritage and Aarish plaster finishes offer unique aesthetic options that draw from traditional techniques, creating distinctive wall treatments with premium quality.",
+      longDescription: "Aarish plaster is a traditional technique that dates back centuries and was commonly used in royal palaces and heritage buildings. Our craftsmen have mastered this art form and can recreate these magnificent finishes for modern spaces. Each application is a work of art, featuring subtle variations in texture and color that create a truly luxurious appearance.",
       features: [
         "Unique decorative finishes",
         "Premium quality materials",
@@ -54,9 +91,41 @@ const ProductsPage = () => {
         "Suitable for feature walls",
         "Professional application available"
       ],
-      image: "/aarish.png" // Updated to use the new aarish.png image
+      image: "/aarish.png",
+      gallery: [
+        "/aarish.png",
+        "/image.jpg",
+        "/aboutback.jpg",
+        "/aarish.png",
+        "/image.jpg",
+        "/aarish.png",
+      ]
     }
   ];
+
+  // Save scroll position and lock body scroll when modal opens
+  const openProductDetail = (product: Product) => {
+    setScrollPosition(window.scrollY);
+    setSelectedProduct(product);
+    setShowDetail(true);
+    // Lock body scroll
+    document.body.style.overflow = 'hidden';
+  };
+
+  // Restore scroll position when modal closes
+  const closeProductDetail = () => {
+    setShowDetail(false);
+    // Unlock body scroll
+    document.body.style.overflow = '';
+    // No need to manually restore scroll position as the page will maintain its position
+  };
+
+  // Clean up body styles when component unmounts
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
   return (
     <div className="pt-0">
@@ -64,7 +133,7 @@ const ProductsPage = () => {
       <div className="relative h-[350px] md:h-[450px]">
         <Image 
           src="/image.jpg" 
-          alt="Jai Lime & Chemical Products" 
+          alt="Manisha Lime Finish Products" 
           fill
           className="object-cover"
         />
@@ -72,6 +141,14 @@ const ProductsPage = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-white mt-16">Our Products</h1>
         </div>
       </div>
+      
+      {/* Product Detail Modal */}
+      {showDetail && selectedProduct && (
+        <ProductDetail
+          product={selectedProduct}
+          onClose={closeProductDetail}
+        />
+      )}
       
       {/* Products Introduction */}
       <section className="py-16">
@@ -91,13 +168,18 @@ const ProductsPage = () => {
             {products.map((product, index) => (
               <div key={product.id} className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}>
                 <div className="w-full md:w-1/2">
-                  <div className="relative h-80 rounded-lg overflow-hidden shadow-lg">
+                  <div className="relative h-80 rounded-lg overflow-hidden shadow-lg group cursor-pointer" onClick={() => openProductDetail(product)}>
                     <Image 
                       src={product.image} 
                       alt={product.name} 
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <div className="bg-white/80 px-4 py-2 rounded-lg">
+                        <span className="text-orange-800 font-medium">View Gallery</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="w-full md:w-1/2">
@@ -116,12 +198,15 @@ const ProductsPage = () => {
                       ))}
                     </ul>
                   </div>
-                  <Link 
-                    href="/contact" 
-                    className="inline-block bg-orange-600 text-white py-2 px-6 rounded-md hover:bg-orange-700 transition"
+                  <button 
+                    onClick={() => openProductDetail(product)}
+                    className="inline-block bg-orange-600 text-white py-2 px-6 rounded-md hover:bg-orange-700 transition flex items-center space-x-2"
                   >
-                    Inquire Now
-                  </Link>
+                    <span>View Details</span>
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </button>
                 </div>
               </div>
             ))}
@@ -135,7 +220,7 @@ const ProductsPage = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-orange-800 mb-2">Professional Application</h2>
             <p className="text-gray-600 max-w-3xl mx-auto">
-              लाइम (प्लास्टर) का कार्य अनुभवी कारीगरों द्वारा उचित दर पर करवाने की सुविधा उपलब्ध।
+              Professional lime plastering services available with experienced craftsmen at reasonable rates.
             </p>
             <div className="w-24 h-1 bg-orange-600 mx-auto mt-4"></div>
           </div>

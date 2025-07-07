@@ -1,8 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
+import { Facility } from '../../types';
 
 const ManufacturingPage = () => {
-  const facilities = [
+  const facilities: Facility[] = [
     {
       title: "Modern Equipment",
       description: "We utilize state-of-the-art machinery and equipment to ensure precision and quality in our manufacturing process.",
@@ -209,7 +210,7 @@ const ManufacturingPage = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {facilities.map((facility, index) => (
+            {facilities.map((facility: Facility, index: number) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-md">
                 <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
                   <span className="text-orange-600 text-xl font-semibold">{facility.icon.charAt(0).toUpperCase()}</span>
@@ -218,6 +219,19 @@ const ManufacturingPage = () => {
                 <p className="text-gray-600">{facility.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Professional Application Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-orange-800 mb-2">Professional Application</h2>
+            <p className="text-gray-600 max-w-3xl mx-auto">
+              Professional lime plastering services available with experienced craftsmen at reasonable rates.
+            </p>
+            <div className="w-24 h-1 bg-orange-600 mx-auto mt-4"></div>
           </div>
         </div>
       </section>
